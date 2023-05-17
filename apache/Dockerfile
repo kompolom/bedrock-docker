@@ -16,9 +16,6 @@ RUN set -ex; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
 	ghostscript \
-	zip \
-	unzip \
-	less \
 	libfreetype6-dev \
 	libicu-dev \
 	libjpeg-dev \
@@ -26,7 +23,6 @@ RUN set -ex; \
 	libpng-dev \
 	libwebp-dev \
 	libzip-dev \
-    mariadb-client \
 	; \
 	\
 	docker-php-ext-configure gd \
@@ -67,6 +63,11 @@ RUN set -ex; \
 	| xargs -rt apt-mark manual; \
 	\
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	apt-get install -y --no-install-recommends \
+	zip \
+	unzip \
+	less \
+    mariadb-client; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
 	! { ldd "$extDir"/*.so | grep 'not found'; }; \
