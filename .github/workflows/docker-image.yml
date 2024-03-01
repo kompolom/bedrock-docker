@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build apache image
-      run: docker build ./apache --file Dockerfile --tag kompolom/bedrok-docker:apache-$(date +%s)
+      run: docker build ./apache --tag kompolom/bedrok-apache-base:php8
