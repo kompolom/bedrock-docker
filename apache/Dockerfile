@@ -8,6 +8,9 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # wp-cli
 COPY --from=wordpress:cli /usr/local/bin/wp  /usr/local/bin/wp
 
+RUN echo "Acquire::http::Pipeline-Depth 0;" > /etc/apt/apt.conf.d/99custom && \
+    echo "Acquire::http::No-Cache true;" >> /etc/apt/apt.conf.d/99custom && \
+    echo "Acquire::BrokenProxy    true;" >> /etc/apt/apt.conf.d/99custom
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
 	\
